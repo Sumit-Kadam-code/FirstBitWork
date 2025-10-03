@@ -1,0 +1,87 @@
+ Q1 . mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| mysql              |
+| performance_schema |
+| sakila             |
+| school             |
+| sep25              |
+| sep26              |
+| sys                |
+| world              |
++--------------------+
+
+
+2. 
+Login to MySQL and view all databases already present. You should get 
+following result : 
+Write an SQL statement to create a simple table countries including columns 
+country_id,country_name and region_id. After this display the structure of 
+table as below : 
+ 
+ans. mysql> create table countries
+    -> (country_id int primary key ,
+    -> country_name varchar(20) not null,
+    -> region_id int );
+
+mysql> desc countries;
++--------------+-------------+------+-----+---------+-------+
+| Field        | Type        | Null | Key | Default | Extra |
++--------------+-------------+------+-----+---------+-------+
+| country_id   | int         | NO   | PRI | NULL    |       |
+| country_name | varchar(20) | NO   |     | NULL    |       |
+| region_id    | int         | YES  |     | NULL    |       |
++--------------+-------------+------+-----+---------+-------+
+
+3.mysql>  create table jobs
+    -> ( job_id int primary key,
+    -> job_title varchar(50) not null,
+    -> min_salary decimal(10,2),
+    -> max_salary decimal(10,2),
+    -> constraint  chk_max_salary check (max_salary <=25000));
+
+
+mysql> insert into jobs (job_id, job_title, min_salary, max_salary)
+    -> values
+    -> (1,"Software engineering",15000,22000),
+    -> (2,"data analyst",12000,20000);
+
+
+
+4.mysql> create table job_histry
+    -> (employee_id int ,
+    -> start_date  date,
+    -> end_date date,
+    -> job_id int,
+    -> department_id int );
+
+
+mysql> desc job_histry;
++---------------+------+------+-----+---------+-------+
+| Field         | Type | Null | Key | Default | Extra |
++---------------+------+------+-----+---------+-------+
+| employee_id   | int  | YES  |     | NULL    |       |
+| start_date    | date | YES  |     | NULL    |       |
+| end_date      | date | YES  |     | NULL    |       |
+| job_id        | int  | YES  |     | NULL    |       |
+| department_id | int  | YES  |     | NULL    |       |
++---------------+------+------+-----+---------+-------+
+
+
+
+5.mysql> alter table countries
+    -> add constraint unique_country_id unique
+    -> (country_id);
+Query OK, 0 rows affected (0.13 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc countries;
++--------------+-------------+------+-----+---------+-------+
+| Field        | Type        | Null | Key | Default | Extra |
++--------------+-------------+------+-----+---------+-------+
+| country_id   | int         | NO   | PRI | NULL    |       |
+| country_name | varchar(20) | NO   |     | NULL    |       |
+| region_id    | int         | YES  |     | NULL    |       |
++--------------+-------------+------+-----+---------+-------+
